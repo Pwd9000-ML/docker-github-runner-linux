@@ -11,16 +11,13 @@ LABEL GitHub="https://github.com/Pwd9000-ML"
 LABEL BaseImage="ubuntu:20.04"
 LABEL RunnerVersion=${RUNNER_VERSION}
 
-# update the base packages + Register HashiCorp GPG keys + Add HashiCorp package repository + add a non-sudo user + Install Terraform
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - \
-    apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
-    apt-get update -y && apt-get upgrade -y && useradd -m docker \
-    apt install terraform
+# update the base packages + add a non-sudo user
+RUN apt-get update -y && apt-get upgrade -y && useradd -m docker
 
 # install python, terraform and the packages the code depends on along with jq so we can parse JSON
 # add additional packages as necessary
 RUN apt-get install -y --no-install-recommends \
-    curl git azure-cli jq build-essential libssl-dev libffi-dev python3 python3-venv python3-dev python3-pip
+    curl git azure-cli terraform jq build-essential libssl-dev libffi-dev python3 python3-venv python3-dev python3-pip
 
 # cd into the user directory, download and unzip the github actions runner
 RUN cd /home/docker && mkdir actions-runner && cd actions-runner \

@@ -26,8 +26,8 @@ RUN cd /home/docker && mkdir actions-runner && cd actions-runner \
 # install some additional dependencies
 RUN chown -R docker ~docker && /home/docker/actions-runner/bin/installdependencies.sh
 
-# copy over the start.sh script
-COPY scripts/start.sh start.sh
+# add over the start.sh script
+ADD scripts/start.sh start.sh
 
 # make the script executable
 RUN chmod +x start.sh

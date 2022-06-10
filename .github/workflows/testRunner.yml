@@ -13,7 +13,7 @@ jobs:
     - name: Install Terraform
       run: |
         wget https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_$TERRAFORM_VERSION_linux_amd64.zip
-        unzip terraform_TERRAFORM_VERSION_linux_amd64.zip
+        unzip terraform_$TERRAFORM_VERSION_linux_amd64.zip
         mv terraform /usr/local/bin/
     - name: Display Terraform Version
       run: terraform --version

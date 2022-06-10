@@ -6,15 +6,10 @@ on:
 jobs:
   testRunner:
     runs-on: [self-hosted]
-    env:
-      TERRAFORM_VERSION: 1.2.2
     steps:
     - uses: actions/checkout@v2
     - name: Install Terraform
-      run: |
-        wget "https://releases.hashicorp.com/terraform/${{ env.TERRAFORM_VERSION }}/terraform_${{ env.TERRAFORM_VERSION }}_linux_amd64.zip"
-        unzip "terraform_${{ env.TERRAFORM_VERSION }}_linux_amd64.zip"
-        mv terraform /usr/local/bin/
+      uses: hashicorp/setup-terraform@v2
     - name: Display Terraform Version
       run: terraform --version
     - name: Display Azure-CLI Version

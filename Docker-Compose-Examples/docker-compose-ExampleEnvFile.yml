@@ -1,0 +1,12 @@
+---
+version: '3.8'
+
+services:
+  runner:
+    image: pwd9000-github-runner-lin:latest
+    build:
+      context: .
+      args:
+        RUNNER_VERSION: '2.292.0'
+    env_file:
+      - ./variables.env

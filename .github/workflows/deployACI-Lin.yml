@@ -11,7 +11,7 @@ env:
   GH_REPOSITORY: "docker-github-runner-linux" #Change here to deploy self hosted runner ACI to another repo.
 
 jobs:
-  build-and-push:
+  deploy-gh-runner-aci:
     runs-on: ubuntu-latest
     steps:
       # checkout the repo

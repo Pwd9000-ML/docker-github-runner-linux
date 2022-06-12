@@ -1,0 +1,37 @@
+name: Deploy_GHRunner_Linux_ACI
+
+on:
+  workflow_dispatch:
+
+env:
+  RUNNER_VERSION: 2.293.0
+  ACI_RESOURCE_GROUP: "Demo-ACI-GitHub-Runners-RG"
+  ACI_NAME: "gh-runner-linux-01"
+  GH_OWNER: "Pwd9000-ML"
+  GH_REPOSITORY: "docker-github-runner-linux" #Change here to deploy self hosted runner ACI to another repo.
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the repo
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@main
+
+      - name: "Login via Azure CLI"
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      #NOTE: {{ secrets.GITHUB_TOKEN }} is a default built in token (see GitHub tokens for more details or specify custom token)
+      - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+          resource-group: ${{ env.ACI_RESOURCE_GROUP }}
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/pwd9000-github-runner-lin:${{ env.RUNNER_VERSION }}
+          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          name: ${{ env.ACI_NAME }}
+          environment-variables: GH_TOKEN=${{ secrets.GITHUB_TOKEN }} GH_OWNER=${{ env.GH_OWNER }} GH_REPOSITORY=${{ env.GH_REPOSITORY }}
+          location: 'uksouth'

@@ -7,6 +7,7 @@ env:
   RUNNER_VERSION: 2.293.0
   ACI_RESOURCE_GROUP: "Demo-ACI-GitHub-Runners-RG"
   ACI_NAME: "gh-runner-linux-01"
+  DNS_NAME_LABEL: "gh-lin-01"
   GH_OWNER: "Pwd9000-ML"
   GH_REPOSITORY: "docker-github-runner-linux" #Change here to deploy self hosted runner ACI to another repo.
 
@@ -33,5 +34,6 @@ jobs:
           registry-username: ${{ secrets.REGISTRY_USERNAME }}
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           name: ${{ env.ACI_NAME }}
+          dns-name-label: ${{ env.DNS_NAME_LABEL }}
           environment-variables: GH_TOKEN=${{ secrets.GITHUB_TOKEN }} GH_OWNER=${{ env.GH_OWNER }} GH_REPOSITORY=${{ env.GH_REPOSITORY }}
           location: 'uksouth'

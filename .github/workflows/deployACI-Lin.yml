@@ -24,7 +24,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      #NOTE: {{ secrets.GITHUB_TOKEN }} is a default built in token (see GitHub tokens for more details or specify custom token)
       - name: 'Deploy to Azure Container Instances'
         uses: 'azure/aci-deploy@v1'
         with:

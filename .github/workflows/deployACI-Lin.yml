@@ -36,3 +36,4 @@ jobs:
           dns-name-label: ${{ env.DNS_NAME_LABEL }}
           environment-variables: GH_TOKEN=${{ secrets.PAT_TOKEN }} GH_OWNER=${{ env.GH_OWNER }} GH_REPOSITORY=${{ env.GH_REPOSITORY }}
           location: 'uksouth'
+          OS-type: 'Linux'

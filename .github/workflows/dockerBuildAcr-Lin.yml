@@ -34,7 +34,7 @@ jobs:
           image-ref: ${{ secrets.REGISTRY_LOGIN_SERVER }}/pwd9000-github-runner-lin:${{ env.RUNNER_VERSION }}
           format: 'table'
           ignore-unfixed: true
-          exit-code: '1'
+          exit-code: '0'
           severity: 'CRITICAL,HIGH'
 
       - name: "Push container image"

@@ -22,7 +22,7 @@ $acrImage = "$acrLoginServer/pwd9000-github-runner-lin:2.293.0" #Image reference
 #Variables (GitHub)
 $pat = "ghPatToken" #GitHub PAT token
 $githubOrg = "Pwd9000-ML" #GitHub Owner/Org
-$githubRepo = "docker-github-runner-linux" #GitHub repository to register self hosted runners against
+$githubRepo = "docker-github-runner-linux" #Target GitHub repository to register self hosted runners against
 $appName = "GitHub-ACI-Deploy" #Previously created Service Principal linked to GitHub Repo (See part 3 of blog series)
 
 # Create a resource group to deploy ACA

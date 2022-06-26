@@ -77,7 +77,7 @@ az containerapp create --resource-group "$acaResourceGroupName" `
     --registry-server "$acrLoginServer" `
     --registry-username "$acrUsername" `
     --registry-password "$acrPassword" `
-    --secrets gh-token="$pat" storage-connection-string="$storageConnection" `
+    --secrets gh-token="$pat" `
     --env-vars GH_OWNER="$githubOrg" GH_REPOSITORY="$githubRepo" GH_TOKEN=secretref:gh-token `
     --cpu "1.75" --memory "3.5Gi" `
     --min-replicas 0 `

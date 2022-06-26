@@ -9,11 +9,7 @@ env:
 jobs:
   #External Job to create and associate workflow with a unique Job ID on Azure queue to scale up KEDA
   scale-keda-queue-up:
-    runs-on: ubuntu-latest
-    outputs:
-      scaleJobId: ${{ steps.scaleJob.outputs.scaleJobId }}
-      scaleJobPop: ${{ steps.scaleJob.outputs.scaleJobPop }}
-    
+    runs-on: ubuntu-latest 
     steps:
     - name: "Login via Azure CLI"
       uses: azure/login@v1
@@ -24,17 +20,18 @@ jobs:
       id: scaleJob
       run: |
         OUTPUT=$(az storage message put --queue-name gh-runner-scaler --content ${{ github.job }} --account-name ${{ env.AZ_STORAGE_ACCOUNT }})
-        ID=$(echo "$OUTPUT" | grep "id" | sed 's/^.*: //' | sed 's/,*$//g')
-        POP=$(echo "$OUTPUT" | grep "popReceipt" | sed 's/^.*: //' | sed 's/,*$//g')
-        echo "::set-output name=scaleJobId::$ID"
-        echo "::set-output name=scaleJobPop::$POP"
+        echo "::set-output name=scaleJobId::$(echo "$OUTPUT" | grep "id" | sed 's/^.*: //' | sed 's/,*$//g')"
+        echo "::set-output name=scaleJobPop::$(echo "$OUTPUT" | grep "popReceipt" | sed 's/^.*: //' | sed 's/,*$//g')"
+    outputs:
+      scaleJobId: ${{ steps.scaleJob.outputs.scaleJobId }}
+      scaleJobPop: ${{ steps.scaleJob.outputs.scaleJobPop }}
 
   #Subsequent Jobs runs-on [self-hosted]. Job1, Job2, JobN etc etc
   testRunner:
     needs: scale-keda-queue-up
     runs-on: [self-hosted]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Install Terraform
       uses: hashicorp/setup-terraform@v2
     - name: Display Terraform Version

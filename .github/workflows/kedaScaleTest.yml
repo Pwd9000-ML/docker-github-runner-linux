@@ -19,12 +19,11 @@ jobs:
     - name: scale up self hosted
       id: scaleJob
       run: |
-        JOB=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 5 | head -n 1)
-        OUTPUT=$(az storage message put --queue-name gh-runner-scaler --content $JOB --account-name ${{ env.AZ_STORAGE_ACCOUNT }})
+        OUTPUT=$(az storage message put --queue-name gh-runner-scaler --content ${{ github.job }} --account-name ${{ env.AZ_STORAGE_ACCOUNT }})
         echo "blabla"
         echo "$OUTPUT"
-        echo "::set-output name=scaleJobId::$JOB"
-        echo "::set-output name=scaleJobPopId::$JOB"
+        echo "::set-output name=scaleJobId::$OUTPUT"
+        echo "::set-output name=scaleJobPopId::$OUTPUT"
 
     outputs:
       scaleJobId: ${{ steps.scaleJob.outputs.scaleJobId }}

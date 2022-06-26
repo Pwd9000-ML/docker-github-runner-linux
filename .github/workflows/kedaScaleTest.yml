@@ -19,7 +19,7 @@ jobs:
     - name: scale up self hosted
       id: scaleJob
       run: |
-        OUTPUT=$(az storage message put --queue-name gh-runner-scaler --content ${{ github.job }} --account-name ${{ env.AZ_STORAGE_ACCOUNT }})
+        OUTPUT=$(az storage message put --queue-name "gh-runner-scaler" --content "${{ github.job }}" --account-name "${{ env.AZ_STORAGE_ACCOUNT }}")
         echo "::set-output name=scaleJobId::$(echo "$OUTPUT" | grep "id" | sed 's/^.*: //' | sed 's/,*$//g')"
         echo "::set-output name=scaleJobPop::$(echo "$OUTPUT" | grep "popReceipt" | sed 's/^.*: //' | sed 's/,*$//g')"
     outputs:
@@ -47,4 +47,4 @@ jobs:
 
     - name: scale down self hosted
       run: |
-        az storage message delete --id ${{needs.scaleJob.outputs.scaleJobId}} --pop-receipt ${{needs.scaleJob.outputs.scaleJobPop}} --queue-name gh-runner-scaler --account-name ${{ env.AZ_STORAGE_ACCOUNT }}
+        az storage message delete --id "${{needs.scaleJob.outputs.scaleJobId}}" --pop-receipt "${{needs.scaleJob.outputs.scaleJobPop}}" --queue-name "gh-runner-scaler" --account-name "${{ env.AZ_STORAGE_ACCOUNT }}"

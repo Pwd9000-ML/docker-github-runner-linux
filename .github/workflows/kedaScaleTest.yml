@@ -10,10 +10,10 @@ jobs:
   scale-keda-queue:
     runs-on: ubuntu-latest
     steps:
-      - name: "Login via Azure CLI"
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: "Login via Azure CLI"
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     
     - name: scale up self hosted
       run: az storage message put --queue-name gh-runner-scaler --content ${{ github.job }} --account-name ${{ env.AZ_STORAGE_ACCOUNT }} 

@@ -12,7 +12,7 @@ jobs:
       #  with:
       #    creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: scale up self hosted
-      run: az storage message put --queue-name gh-runner-scaler --content ${{ github.job }} -- ${{ secrets.KEDA_QUEUE_SCALER_CONNECTION }}
+      run: az storage message put --queue-name gh-runner-scaler --content ${{ github.job }} --connection-string ${{ secrets.KEDA_QUEUE_SCALER_CONNECTION }}
 
 #  testRunner:
 #    runs-on: [self-hosted]

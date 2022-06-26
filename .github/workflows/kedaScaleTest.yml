@@ -20,14 +20,14 @@ jobs:
       id: scaleJob
       run: |
         OUTPUT=$(az storage message put --queue-name gh-runner-scaler --content ${{ github.job }} --account-name ${{ env.AZ_STORAGE_ACCOUNT }})
-        echo "blabla"
-        echo "$OUTPUT"
-        echo "::set-output name=scaleJobId::$OUTPUT"
-        echo "::set-output name=scaleJobPopId::$OUTPUT"
+        ID=$(echo "$OUTPUT" | grep "id" | sed 's/^.*: //' | sed 's/,*$//g')
+        POP=$(echo "$OUTPUT" | grep "popReceipt" | sed 's/^.*: //' | sed 's/,*$//g')
+        echo "::set-output name=scaleJobId::$ID"
+        echo "::set-output name=scaleJobPop::$POP"
 
     outputs:
       scaleJobId: ${{ steps.scaleJob.outputs.scaleJobId }}
-      scaleJobPopId: ${{ steps.scaleJob.outputs.scaleJobPopId }}
+      scaleJobPopId: ${{ steps.scaleJob.outputs.scaleJobPop }}
 
   #Subsequent Jobs runs-on [self-hosted]. Job1, Job2, JobN etc etc
   testRunner:
@@ -43,11 +43,11 @@ jobs:
       run: az --version
     
     #Remove unique Job ID on Azure queue as final step to scale down KEDA
-#    - name: "Login via Azure CLI"
-#      uses: azure/login@v1
-#      with:
-#        creds: ${{ secrets.AZURE_CREDENTIALS }}
-#
-#    - name: scale down self hosted
-#      run: |
-#        az storage message delete --id ${{needs.scaleJob.outputs.scaleJobId}} --pop-receipt ${{needs.scaleJob.outputs.scaleJobPopId}} --queue-name gh-runner-scaler --account-name ${{ env.AZ_STORAGE_ACCOUNT }}
+    - name: "Login via Azure CLI"
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: scale down self hosted
+      run: |
+        az storage message delete --id ${{needs.scaleJob.outputs.scaleJobId}} --pop-receipt ${{needs.scaleJob.outputs.scaleJobPop}} --queue-name gh-runner-scaler --account-name ${{ env.AZ_STORAGE_ACCOUNT }}

@@ -38,6 +38,8 @@ jobs:
       run: terraform --version
     - name: Display Azure-CLI Version
       run: az --version
+    - name: Delay runner finish (5min)
+      run: sleep 5m
     
     #Remove unique Job ID on Azure queue as final step to scale down KEDA
     - name: "Login via Azure CLI"

@@ -1,0 +1,26 @@
+name: KEDA Scale self hosted
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scale-keda-queue:
+    runs-on: ubuntu-latest
+    steps:
+      #- name: "Login via Azure CLI"
+      #  uses: azure/login@v1
+      #  with:
+      #    creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: scale up self hosted
+      run: az storage message put --queue-name gh-runner-scaler --content ${{ GITHUB_JOB }} -- ${{ secret.KEDA_QUEUE_SCALER_CONNECTION }}
+
+#  testRunner:
+#    runs-on: [self-hosted]
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: Install Terraform
+#      uses: hashicorp/setup-terraform@v2
+#    - name: Display Terraform Version
+#      run: terraform --version
+#    - name: Display Azure-CLI Version
+#      run: az --version

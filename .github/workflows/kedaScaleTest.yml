@@ -27,7 +27,7 @@ jobs:
 
     outputs:
       scaleJobId: ${{ steps.scaleJob.outputs.scaleJobId }}
-      scaleJobPopId: ${{ steps.scaleJob.outputs.scaleJobPop }}
+      scaleJobPop: ${{ steps.scaleJob.outputs.scaleJobPop }}
 
   #Subsequent Jobs runs-on [self-hosted]. Job1, Job2, JobN etc etc
   testRunner:

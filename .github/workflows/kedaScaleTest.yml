@@ -39,8 +39,8 @@ jobs:
       run: terraform --version
     - name: Display Azure-CLI Version
       run: az --version
-    - name: Delay runner finish (5min)
-      run: sleep 1m
+    - name: Delay runner finish
+      run: sleep 2m
     
     #Remove unique QueueId on Azure queue associated with workflow as final step to scale down KEDA
     - name: "Login via Azure CLI"
@@ -50,8 +50,4 @@ jobs:
 
     - name: scale down self hosted
       run: |
-        QUEUEID="${{needs.scaleJob.outputs.scaleJobId}}"
-        POPRECEIPT="${{needs.scaleJob.outputs.scaleJobPop}}"
-        echo $QUEUEID
-        echo $POPRECEIPT
-        az storage message delete --id "${{needs.scaleJob.outputs.scaleJobId}}" --pop-receipt "${{needs.scaleJob.outputs.scaleJobPop}}" --queue-name "${{ env.AZ_QUEUE_NAME }}" --account-name "${{ env.AZ_STORAGE_ACCOUNT }}"
+        az storage message delete --id "${{needs.scale-keda-queue-up.outputs.scaleJobId}}" --pop-receipt "${{needs.scale-keda-queue-up.outputs.scaleJobPop}}" --queue-name "${{ env.AZ_QUEUE_NAME }}" --account-name "${{ env.AZ_STORAGE_ACCOUNT }}"

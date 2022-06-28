@@ -39,7 +39,7 @@ jobs:
       run: terraform --version
     - name: Display Azure-CLI Version
       run: az --version
-    - name: Delay runner finish
+    - name: Delay runner finish (2min)
       run: sleep 2m
     
     #Remove unique QueueId on Azure queue associated with workflow as final step to scale down KEDA

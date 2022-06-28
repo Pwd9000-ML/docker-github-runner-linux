@@ -50,4 +50,4 @@ jobs:
 
     - name: scale down self hosted
       run: |
-        az storage message delete --id "${{needs.scale-keda-queue-up.outputs.scaleJobId}}" --pop-receipt "${{needs.scale-keda-queue-up.outputs.scaleJobPop}}" --queue-name "${{ env.AZ_QUEUE_NAME }}" --account-name "${{ env.AZ_STORAGE_ACCOUNT }}"
+        az storage message delete --id ${{needs.scale-keda-queue-up.outputs.scaleJobId}} --pop-receipt ${{needs.scale-keda-queue-up.outputs.scaleJobPop}} --queue-name "${{ env.AZ_QUEUE_NAME }}" --account-name "${{ env.AZ_STORAGE_ACCOUNT }}"

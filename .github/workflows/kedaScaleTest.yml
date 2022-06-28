@@ -40,7 +40,7 @@ jobs:
     - name: Display Azure-CLI Version
       run: az --version
     - name: Delay runner finish (5min)
-      run: sleep 5m
+      run: sleep 1m
     
     #Remove unique QueueId on Azure queue associated with workflow as final step to scale down KEDA
     - name: "Login via Azure CLI"

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  RUNNER_VERSION: 2.293.0
+  RUNNER_VERSION: 2.294.0
   ACI_RESOURCE_GROUP: "Demo-ACI-GitHub-Runners-RG"
   ACI_NAME: "gh-runner-linux-01"
   DNS_NAME_LABEL: "gh-lin-01"

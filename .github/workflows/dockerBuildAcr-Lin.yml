@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  RUNNER_VERSION: 2.293.0
+  RUNNER_VERSION: 2.294.0
 
 jobs:
   build-and-push:

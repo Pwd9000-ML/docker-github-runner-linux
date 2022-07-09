@@ -12,10 +12,10 @@ jobs:
     steps:
       # checkout the repo
       - name: "Checkout GitHub Action"
-        uses: actions/checkout@main
+        uses: actions/checkout@v3.0.2
 
       - name: "Login via Azure CLI"
-        uses: azure/login@v1
+        uses: azure/login@v1.4.5
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -29,7 +29,7 @@ jobs:
           docker build --build-arg RUNNER_VERSION=${{ env.RUNNER_VERSION }} -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/pwd9000-github-runner-lin:${{ env.RUNNER_VERSION }} .
 
       - name: "Vulnerability scan container image with Trivy"
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.5.1
         with:
           image-ref: ${{ secrets.REGISTRY_LOGIN_SERVER }}/pwd9000-github-runner-lin:${{ env.RUNNER_VERSION }}
           format: 'sarif'

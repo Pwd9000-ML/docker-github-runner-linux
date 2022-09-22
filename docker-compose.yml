@@ -3,7 +3,7 @@ version: '3.8'
 
 services:
   runner:
-    image: pwd9000-github-runner-lin:latest
+    image: ubuntu:latest
     build:
       context: .
       args:

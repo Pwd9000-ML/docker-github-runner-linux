@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4.0.0
 
       - name: "Login via Azure CLI"
-        uses: azure/login@v1.4.5
+        uses: azure/login@v1.4.7
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 

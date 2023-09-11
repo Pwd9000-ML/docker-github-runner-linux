@@ -1,5 +1,5 @@
 # base image
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 #input GitHub runner version argument
 ARG RUNNER_VERSION

@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3.6.0
     - name: Install Terraform
-      uses: hashicorp/setup-terraform@v2.0.0
+      uses: hashicorp/setup-terraform@v2.0.3
     - name: Display Terraform Version
       run: terraform --version
     - name: Display Azure-CLI Version

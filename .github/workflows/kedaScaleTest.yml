@@ -32,7 +32,7 @@ jobs:
     needs: scale-keda-queue-up
     runs-on: [self-hosted]
     steps:
-    - uses: actions/checkout@v4.0.0
+    - uses: actions/checkout@v4.1.0
     - name: Install Terraform
       uses: hashicorp/setup-terraform@v2.0.3
     - name: Display Terraform Version

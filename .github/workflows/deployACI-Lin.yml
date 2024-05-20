@@ -17,7 +17,7 @@ jobs:
     steps:
       # checkout the repo
       - name: "Checkout GitHub Action"
-        uses: actions/checkout@v4.1.4
+        uses: actions/checkout@v4.1.6
 
       - name: "Login via Azure CLI"
         uses: azure/login@v2.1.0

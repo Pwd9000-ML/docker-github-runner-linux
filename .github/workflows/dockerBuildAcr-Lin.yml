@@ -20,7 +20,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: "Build GitHub Runner container image"
-        uses: azure/docker-login@v1
+        uses: azure/docker-login@v2
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
@@ -42,7 +42,7 @@ jobs:
           sarif_file: 'trivy-results.sarif'
 
       - name: "Push container image to ACR"
-        uses: azure/docker-login@v1
+        uses: azure/docker-login@v2
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}

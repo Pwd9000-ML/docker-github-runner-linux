@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest 
     steps:
     - name: "Login via Azure CLI"
-      uses: azure/login@v2.1.1
+      uses: azure/login@v2.2.0
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -44,7 +44,7 @@ jobs:
     
     #Remove unique QueueId on Azure queue associated with workflow as final step to scale down KEDA
     - name: "Login via Azure CLI"
-      uses: azure/login@v2.1.1
+      uses: azure/login@v2.2.0
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 

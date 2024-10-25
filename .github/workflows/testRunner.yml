@@ -7,7 +7,7 @@ jobs:
   testRunner:
     runs-on: [self-hosted]
     steps:
-    - uses: actions/checkout@v4.1.7
+    - uses: actions/checkout@v4.2.2
     - name: Install Terraform
       uses: hashicorp/setup-terraform@v3.1.1
     - name: Display Terraform Version
